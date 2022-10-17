@@ -7,8 +7,10 @@ public class RebuildButtonController : MonoBehaviour
 
     [SerializeField] private TMP_InputField gridInputfield;
     [SerializeField] private TMP_Text invalidValueText;
+
     [SerializeField] private CameraController cameraController;
     [SerializeField] private GridSpawnController gridSpawnController;
+
     [HideInInspector] public int gridInput;
 
 

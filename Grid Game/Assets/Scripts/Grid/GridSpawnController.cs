@@ -1,9 +1,9 @@
 using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
 public class GridSpawnController : MonoBehaviour
 {
+
     public List<GameObject> gridList = new List<GameObject>();
     [SerializeField] private CameraController cameraController;
     [SerializeField] private GameObject gridPrefab;
