@@ -4,10 +4,12 @@ using System.Collections.Generic;
 public class GridSpawnController : MonoBehaviour
 {
 
-    public List<GameObject> gridList = new List<GameObject>();
+    [SerializeField] private ScoreController scoreController;
     [SerializeField] private CameraController cameraController;
     [SerializeField] private GameObject gridPrefab;
     [SerializeField] private GameObject grids;
+
+    public List<GameObject> gridList = new List<GameObject>();
 
 
 
@@ -22,9 +24,32 @@ public class GridSpawnController : MonoBehaviour
                 grid.transform.parent = grids.transform;
             }
         }
+        SetGridTransform(value);
+    }
 
+
+
+    private void SetGridTransform(float value)
+    {
         grids.transform.position = new Vector3(grids.transform.position.x - (value / 2) + 0.5f, grids.transform.position.y - (value / 2) + 0.5f, 0f);
         cameraController.SetCameraFieldValue(value);
+    }
+
+
+
+    public void CheckIsComplete()
+    {
+        for (int i = 0; i < gridList.Count; i++)
+        {
+            if (gridList[i].GetComponent<GridEnvironmentController>().isComplete)
+            {
+                scoreController.SetScoreValue();
+                foreach (var item in gridList)
+                {
+                    item.GetComponent<GridEnvironmentController>().isComplete = false;
+                }
+            }
+        }
     }
 
 
@@ -37,6 +62,7 @@ public class GridSpawnController : MonoBehaviour
             {
                 Destroy(item);
             }
+            gridList.Clear();
         }
     }
 }

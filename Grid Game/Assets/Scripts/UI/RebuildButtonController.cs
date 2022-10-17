@@ -4,12 +4,10 @@ using TMPro;
 
 public class RebuildButtonController : MonoBehaviour
 {
-
-    [SerializeField] private TMP_InputField gridInputfield;
-    [SerializeField] private TMP_Text invalidValueText;
-
     [SerializeField] private CameraController cameraController;
     [SerializeField] private GridSpawnController gridSpawnController;
+    [SerializeField] private TMP_InputField gridInputfield;
+    [SerializeField] private TMP_Text invalidValueText;
 
     [HideInInspector] public int gridInput;
 
@@ -17,14 +15,13 @@ public class RebuildButtonController : MonoBehaviour
 
     public void SetRebuildButton()
     {
-        gridInput = Convert.ToInt32(gridInputfield.text);
         gridSpawnController.SetGridListClear();
+        gridInput = Convert.ToInt32(gridInputfield.text);
 
-        if (gridInput > 20 || gridInput == 0)
+        if (gridInput > 20 || gridInput <= 1)
         {
             invalidValueText.gameObject.SetActive(true);
         }
-
         else
         {
             invalidValueText.gameObject.SetActive(false);
@@ -32,4 +29,5 @@ public class RebuildButtonController : MonoBehaviour
             cameraController.SetCameraFieldValue(gridInput);
         }
     }
+
 }
